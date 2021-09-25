@@ -1,0 +1,17 @@
+@media (max-width: 768px) {
+  .filter {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+  }
+  .search {
+    width: 100%;
+  }
+  .dropdowndiv {
+    padding-top: 16px;
+  }
+}
+
+.search {
+  max-width: 400px;
+}
