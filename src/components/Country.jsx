@@ -11,10 +11,13 @@ function Country() {
 
     useEffect(() => {
          const fetchCountry = async () => {
-             const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}/`)
-             const data = await res.json()
-             setcountry(data)
-             console.log(data)
+             try{
+                const res = await fetch(`https://restcountries.com/v3/name/${name}`)
+                const data = await res.json()
+                setcountry(data)
+                // console.log(data)
+             }catch{console.log('error')}
+             
          }
 
          fetchCountry()
@@ -29,12 +32,13 @@ function Country() {
                 </Button>
             </Link>
             {country.map((c) => {
-                const {flag, nativeName, population, region, subregion, capital, topLevelDomain, currencies, languages, borders} = c
-                console.log(flag)
+                const {flags,  population, region, subregion, capital, topLevelDomain, currencies, languages, borders} = c
+                console.log(c)
+                // console.log(currencies[Object.keys(currencies)[0]])
                 return(
                     <Flex className='country-content'>
                         <Box p='8' maxW='500px'>
-                            <Image src={flag} alt={name} />
+                            <Image src={flags[0]} alt={name} />
                         </Box>
                         <Box mt='30px'>
                             <Heading>
@@ -42,12 +46,12 @@ function Country() {
                             </Heading>
                             <HStack>
                                 <Box pt='8'>
-                                    <Text fontWeight='semibold' pb='2'>
-                                        Native Name: <span fontWeight='normal'>{nativeName}</span>
+                                    {/* <Text fontWeight='semibold' pb='2'>
+                                        Native Name: <span fontWeight='normal'>{name.nativeName}</span>
                                     </Text>
                                     <Text fontWeight='semibold' pb='2'>
                                         Population: <span fontWeight='normal'>{population}</span>
-                                    </Text>
+                                    </Text> */}
                                     <Text fontWeight='semibold' pb='2'>
                                         Region: <span fontWeight='normal'>{region}</span>
                                     </Text>
@@ -59,14 +63,14 @@ function Country() {
                                     </Text>
                                 </Box>
                                 <Box pl='16'>
-                                    <Text fontWeight='semibold' pb='2'>
+                                    {/* <Text fontWeight='semibold' pb='2'>
                                         Top Level Domain: <span fontWeight='normal'>{topLevelDomain}</span>
+                                    </Text> */}
+                                    <Text fontWeight='semibold' pb='2'>
+                                        Currencies: <span fontWeight='normal'>{currencies[Object.keys(currencies)[0]].name}</span>
                                     </Text>
                                     <Text fontWeight='semibold' pb='2'>
-                                        Currencies: <span fontWeight='normal'>{currencies[0].name}</span>
-                                    </Text>
-                                    <Text fontWeight='semibold' pb='2'>
-                                        Languages: <span fontWeight='normal'>{languages[0].name}</span>
+                                        Languages: <span fontWeight='normal'>{languages[Object.keys(languages)[0]]}</span>
                                     </Text>
                                 </Box>
                             </HStack>
